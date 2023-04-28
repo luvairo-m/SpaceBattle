@@ -10,17 +10,18 @@ namespace SpaceBattle.Models
         public Vector2 Position;
         public int Speed;
 
-        public int ShootingMultiplier = 3;
+        public int ShootingMultiplier = 2;
         public bool IsShooting;
 
         public static List<Bullet> Bullets = new();
 
         public SpaceShip CurrentShip;
 
-        internal Player(SpaceShip currentShip, int speed)
+        internal Player(SpaceShip currentShip, int speed, Vector2 position)
         {
             CurrentShip = currentShip;  
             Speed = speed;  
+            Position = position;
         }
 
         public void Update(GameTime gameTime)

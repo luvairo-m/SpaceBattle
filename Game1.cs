@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SpaceBattle.Models;
+using System;
+using System.Collections.Generic;
 
 namespace SpaceBattle
 {
@@ -21,6 +23,10 @@ namespace SpaceBattle
         private Player player;
         private Background background1;
         private Background background2;
+
+        private Random randomizer = new();
+        internal static List<Enemy> Enemies = new();
+        private double timer = 5d;
 
         public Game1()
         {
@@ -47,8 +53,7 @@ namespace SpaceBattle
             backgroundSprite = Content.Load<Texture2D>("Backgrounds/simple-space-background");
             redBulletSprite = Content.Load<Texture2D>("Bullets/red-bullet");
 
-            player = new(ShipInitializer.Initialize(ShipType.BlueBird), 250);
-            player.Position = new(WindowWidth / 2, WindowHeight / 2);
+            player = new(ShipInitializer.Initialize(ShipType.BlueBird), 250, new(WindowWidth / 2, WindowHeight - 100));
 
             background1 = new Background(new(0, -WindowHeight), 250);
             background2 = new Background(new(), 250);
@@ -59,12 +64,13 @@ namespace SpaceBattle
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.Update(gameTime);
-            background1.Update(gameTime);   
+            background1.Update(gameTime);
             background2.Update(gameTime);
 
-            foreach (var bullet in Player.Bullets)
-                bullet.Update(gameTime);
+            player.Update(gameTime);
+
+            for (var i = 0; i < Player.Bullets.Count; i++)
+                Player.Bullets[i].Update(gameTime); 
 
             base.Update(gameTime);
         }
@@ -75,7 +81,7 @@ namespace SpaceBattle
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(backgroundSprite, 
+            spriteBatch.Draw(backgroundSprite,
                 new Rectangle((int)background1.Position.X, (int)background1.Position.Y,
                 WindowWidth, WindowHeight), Color.White);
             spriteBatch.Draw(backgroundSprite,
@@ -85,9 +91,9 @@ namespace SpaceBattle
             player.CurrentShip.Animation.Draw(spriteBatch);
 
             foreach (var bullet in Player.Bullets)
-                spriteBatch.Draw(redBulletSprite, 
-                    new Vector2(bullet.Position.X - bullet.Size.Width / 2, bullet.Position.Y - bullet.Size.Height / 2), 
-                    Color.White);    
+                spriteBatch.Draw(redBulletSprite,
+                    new Vector2(bullet.Position.X - bullet.Size.Width / 2, bullet.Position.Y - bullet.Size.Height / 2),
+                    Color.White);
 
             spriteBatch.End();
 

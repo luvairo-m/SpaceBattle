@@ -23,6 +23,9 @@ namespace SpaceBattle.Models
 
             if (Position.Y > Game1.WindowHeight)
                 Position.Y = -Game1.WindowHeight;
+
+            if (Position.Y < 0)
+                Player.Bullets.Remove(this);
         }
     }
 }
