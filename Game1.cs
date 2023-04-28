@@ -2,8 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SpaceBattle.Models;
-using System;
 using System.Collections.Generic;
+
+using Color = Microsoft.Xna.Framework.Color;
 
 namespace SpaceBattle
 {
@@ -24,9 +25,7 @@ namespace SpaceBattle
         private Background background1;
         private Background background2;
 
-        private Random randomizer = new();
         internal static List<Enemy> Enemies = new();
-        private double timer = 5d;
 
         public Game1()
         {
@@ -88,7 +87,7 @@ namespace SpaceBattle
                 new Rectangle((int)background2.Position.X, (int)background2.Position.Y,
                 WindowWidth, WindowHeight), Color.White);
 
-            player.CurrentShip.Animation.Draw(spriteBatch);
+            player.CurrentShip.Animation.DrawWithScale(spriteBatch);
 
             foreach (var bullet in Player.Bullets)
                 spriteBatch.Draw(redBulletSprite,

@@ -1,5 +1,4 @@
 ﻿using Cosmos;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace SpaceBattle.Models

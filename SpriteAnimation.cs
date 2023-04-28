@@ -1,5 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Drawing;
+
+using Color = Microsoft.Xna.Framework.Color;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace Cosmos
 {
@@ -12,6 +16,7 @@ namespace Cosmos
         public float Rotation = 0f;
         public float Scale = 1f;
         public SpriteEffects SpriteEffect;
+        public Size Size;
         protected Rectangle[] Rectangles;
         protected int FrameIndex = 0;
 
@@ -26,9 +31,13 @@ namespace Cosmos
                 Rectangles[i] = new Rectangle(i * frameWidth, 0, frameWidth, Texture.Height);
         }
 
-        public void Draw(SpriteBatch spriteBatch) =>
-            spriteBatch.Draw(Texture, Position, Rectangles[FrameIndex], 
-                Color, Rotation, Origin, Scale, SpriteEffect, 0f);
+        public void DrawWithBorders(SpriteBatch spriteBatch) =>
+            spriteBatch.Draw(Texture, new Rectangle(new((int)Position.X, (int)Position.Y), new(Size.Width, Size.Height)), 
+                Rectangles[FrameIndex], Color, Rotation, Origin, SpriteEffect, 0f);
+
+        public void DrawWithScale(SpriteBatch spriteBatch) =>
+            spriteBatch.Draw(Texture, Position, Rectangles[FrameIndex],
+            Color, Rotation, Origin, Scale, SpriteEffect, 0f);
     }
 
     public class SpriteAnimation : SpriteManager
