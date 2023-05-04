@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceBattle.Controllers;
 using SpaceBattle.Models;
 
 namespace SpaceBattle.GameStates
@@ -27,6 +28,8 @@ namespace SpaceBattle.GameStates
             backgroundSprite = contentManager.Load<Texture2D>("Backgrounds/simple-space-background");
             redBulletSprite = contentManager.Load<Texture2D>("Bullets/red-bullet");
 
+            BulletController.RedBulletTexture = redBulletSprite;
+
             player = new(ShipInitializer.Initialize(ShipType.BlueBird), 250, new(Game1.WindowWidth / 2, Game1.WindowHeight - 100));
 
             background1 = new Background(new(0, -Game1.WindowHeight), 250);
@@ -46,7 +49,7 @@ namespace SpaceBattle.GameStates
 
             player.CurrentShip.Animation.DrawWithScale(spriteBatch);
 
-            foreach (var bullet in Player.Bullets)
+            foreach (var bullet in BulletController.bullets)
                 spriteBatch.Draw(redBulletSprite,
                     new Vector2(bullet.Position.X - bullet.Size.Width / 2, bullet.Position.Y - bullet.Size.Height / 2),
                     Color.White);
@@ -60,8 +63,8 @@ namespace SpaceBattle.GameStates
             background2.Update(gameTime);
             player.Update(gameTime);
 
-            for (var i = 0; i < Player.Bullets.Count; i++)
-                Player.Bullets[i].Update(gameTime);
+            for (var i = 0; i < BulletController.bullets.Count; i++)
+                BulletController.bullets[i].Update(gameTime);
         }
     }
 }

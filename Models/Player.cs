@@ -1,11 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SpaceBattle.Controllers;
 using System.Collections.Generic;
 using System.Drawing;
 
 namespace SpaceBattle.Models
 {
-    internal class Player 
+    internal class Player
     {
         public Vector2 Position;
         public int Speed;
@@ -14,13 +17,12 @@ namespace SpaceBattle.Models
         public bool IsShooting;
 
         public static List<Bullet> Bullets = new();
-
         public SpaceShip CurrentShip;
 
         internal Player(SpaceShip currentShip, int speed, Vector2 position)
         {
-            CurrentShip = currentShip;  
-            Speed = speed;  
+            CurrentShip = currentShip;
+            Speed = speed;
             Position = position;
         }
 
@@ -67,11 +69,13 @@ namespace SpaceBattle.Models
                     var placement = buffer + step;
                     buffer = placement + step;
 
-                    Bullets.Add(new Bullet(new(placement, Position.Y), 800, new Size(6, 22)));
+                    BulletController.bullets.Add(new SimpleBullet(new(placement, Position.Y), 800, new Size(6, 22), BulletController.RedBulletTexture));
+                    //Bullets.Add(new Bullet(new(placement, Position.Y), 800, new Size(6, 22)));
                 }
 
                 IsShooting = true;
-            } else if (state.IsKeyUp(Keys.Space) && IsShooting)
+            }
+            else if (state.IsKeyUp(Keys.Space) && IsShooting)
                 IsShooting = false;
         }
     }

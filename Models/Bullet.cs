@@ -1,31 +1,26 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Drawing;
 
 namespace SpaceBattle.Models
 {
-    internal class Bullet
+    internal abstract class Bullet
     {
         public Vector2 Position;
         public int Speed;
         public Size Size;
+        public Texture2D BulletSprite;
 
-        internal Bullet(Vector2 position, int speed, Size size)
+        internal Bullet(Vector2 position, int speed, Size size, Texture2D bulletSprite)
         {
             Position = position;
             Speed = speed;
             Size = size;
+            BulletSprite = bulletSprite;
         }
 
-        public void Update(GameTime gameTime)
-        {
-            var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Position.Y -= deltaTime * Speed;
+        public abstract void Draw(SpriteBatch spriteBatch);
 
-            if (Position.Y > Game1.WindowHeight)
-                Position.Y = -Game1.WindowHeight;
-
-            if (Position.Y < 0)
-                Player.Bullets.Remove(this);
-        }
+        public abstract void Update(GameTime gameTime);
     }
 }
