@@ -10,6 +10,7 @@ namespace SpaceBattle.GameStates
     {
         #region Textures
         public static Texture2D blueBirdSpriteSheet;
+        public static Texture2D simpleEnemySpriteSheet;
         private readonly Texture2D backgroundSprite;
         private readonly Texture2D redBulletSprite;
 
@@ -21,14 +22,18 @@ namespace SpaceBattle.GameStates
         private Player player;
         #endregion
 
+
+
         public ActionState(Game1 game, ContentManager contentManager, GraphicsDeviceManager graphics)
             : base(game, contentManager, graphics)
         {
             blueBirdSpriteSheet = contentManager.Load<Texture2D>("SpaceShips/Player/blue-bird");
             backgroundSprite = contentManager.Load<Texture2D>("Backgrounds/simple-space-background");
             redBulletSprite = contentManager.Load<Texture2D>("Bullets/red-bullet");
+            simpleEnemySpriteSheet = contentManager.Load<Texture2D>("SpaceShips/Enemy/red-destroyer");
 
             BulletController.RedBulletTexture = redBulletSprite;
+            EnemyController.SimpleEnemySprite = simpleEnemySpriteSheet;
 
             player = new(ShipInitializer.Initialize(ShipType.BlueBird), 250, new(Game1.WindowWidth / 2, Game1.WindowHeight - 100));
 
@@ -54,6 +59,12 @@ namespace SpaceBattle.GameStates
                     new Vector2(bullet.Position.X - bullet.Size.Width / 2, bullet.Position.Y - bullet.Size.Height / 2),
                     Color.White);
 
+            foreach (var simpleEnemy in EnemyController.simpleEnemies)
+            {
+                spriteBatch.Draw(simpleEnemySpriteSheet, new Vector2(simpleEnemy.Position.X - simpleEnemy.Size.Width / 2, simpleEnemy.Position.Y - simpleEnemy.Size.Height / 2),
+                    Color.White);
+            }
+
             spriteBatch.End();
         }
 
@@ -63,8 +74,12 @@ namespace SpaceBattle.GameStates
             background2.Update(gameTime);
             player.Update(gameTime);
 
+
             for (var i = 0; i < BulletController.bullets.Count; i++)
                 BulletController.bullets[i].Update(gameTime);
+
+            foreach (var simpleEnemy in EnemyController.simpleEnemies)
+                simpleEnemy.Update(gameTime);
         }
     }
 }
