@@ -2,10 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceBattle.Controls;
 
@@ -59,8 +55,8 @@ public class Button : Component
 
         if (!string.IsNullOrEmpty(Text))
         {
-            var x = (Rectangle.X + (Rectangle.Width / 2)) - (_font.MeasureString(Text).X / 2);
-            var y = (Rectangle.Y + (Rectangle.Height / 2)) - (_font.MeasureString(Text).Y / 2);
+            var x = Rectangle.X + (Rectangle.Width / 2) - (_font.MeasureString(Text).X / 2);
+            var y = Rectangle.Y + (Rectangle.Height / 2) - (_font.MeasureString(Text).Y / 2);
 
             spriteBatch.DrawString(_font, Text, new Vector2(x, y), PenColour);
         }

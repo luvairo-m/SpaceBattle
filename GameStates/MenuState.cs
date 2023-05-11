@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,7 +9,7 @@ namespace SpaceBattle.GameStates;
 
 public class MenuState : State
 {
-    private List<Component> components;
+    private readonly List<Component> components;
 
     public MenuState(Game1 game, GraphicsDeviceManager graphicsDevice, ContentManager content) 
         : base(game, content, graphicsDevice)
@@ -22,15 +19,16 @@ public class MenuState : State
 
         var loadGameButton = new Button(buttonTexture, buttonFont)
         {
-            Position = new Vector2(185, 346),
-            Text = "Game",
+            Position = new Vector2(Game1.WindowWidth / 2 - buttonTexture.Width / 2, 
+            Game1.WindowHeight / 2 - buttonTexture.Height - 5),
+            Text = "Start",
         };
 
         loadGameButton.Click += LoadGameButton_Click;
 
         var quitGameButton = new Button(buttonTexture, buttonFont)
         {
-            Position = new Vector2(185, 496),
+            Position = new Vector2(Game1.WindowWidth / 2 - buttonTexture.Width / 2, Game1.WindowHeight / 2),
             Text = "Quit",
         };
 
@@ -49,6 +47,8 @@ public class MenuState : State
 
         foreach (var component in components)
             component.Draw(gameTime, spriteBatch);
+
+        Graphics.GraphicsDevice.Clear(Color.Blue);
 
         spriteBatch.End();
     }

@@ -7,7 +7,8 @@ namespace SpaceBattle.Models
     enum ShipType
     {
         BlueBird,
-        RedDestroyer
+        RedDestroyer,
+        GreenDestroyer
     }
 
     internal static class ShipInitializer
@@ -18,10 +19,20 @@ namespace SpaceBattle.Models
             {
                 ShipType.BlueBird => new SpaceShip
                 {
-                    Animation = new SpriteAnimation(ActionState.blueBirdSpriteSheet, 3, 3) 
+                    Animation = new SpriteAnimation(ActionState.BlueBirdSpriteSheet, 3, 3) 
                     { 
                         Scale = 0.2f,
                     },
+                    Size = new(154, 113)
+                },
+                ShipType.RedDestroyer => new SpaceShip
+                {
+                    Animation = new SpriteAnimation(ActionState.RedDestroyerSpriteSheet, 5, 4),
+                    Size = new(154, 113)
+                },
+                ShipType.GreenDestroyer => new SpaceShip
+                {
+                    Animation = new SpriteAnimation(ActionState.GreenDestroyerSpriteSheet, 5, 4),
                     Size = new(154, 113)
                 },
                 _ => throw new ArgumentException("Ship not found"),

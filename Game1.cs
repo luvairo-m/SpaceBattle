@@ -38,7 +38,6 @@ namespace SpaceBattle
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // currentState = new ActionState(this, Content, graphics);
             currentState = new MenuState(this, graphics, Content);
-
         }
 
         protected override void Update(GameTime gameTime)

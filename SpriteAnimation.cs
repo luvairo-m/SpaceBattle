@@ -37,7 +37,7 @@ namespace Cosmos
 
         public void DrawWithScale(SpriteBatch spriteBatch) =>
             spriteBatch.Draw(Texture, Position, Rectangles[FrameIndex],
-            Color, Rotation, Origin, Scale, SpriteEffect, 0f);
+                Color, Rotation, Origin, Scale, SpriteEffect, 0f);
     }
 
     public class SpriteAnimation : SpriteManager
@@ -57,12 +57,8 @@ namespace Cosmos
             if (timeElapsed > timeToUpdate)
             {
                 timeElapsed -= timeToUpdate;
-
-                if (FrameIndex < Rectangles.Length - 1)
-                    FrameIndex++;
-
-                else if (IsLooping)
-                    FrameIndex = 0;
+                if (FrameIndex < Rectangles.Length - 1) FrameIndex++;
+                else if (IsLooping) FrameIndex = 0;
             }
         }
 

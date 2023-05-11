@@ -8,7 +8,9 @@ namespace SpaceBattle.GameStates
     internal class ActionState : State
     {
         #region Textures
-        public static Texture2D blueBirdSpriteSheet;
+        public static Texture2D BlueBirdSpriteSheet;
+        public static Texture2D RedDestroyerSpriteSheet;
+        public static Texture2D GreenDestroyerSpriteSheet;
         private readonly Texture2D backgroundSprite;
         private readonly Texture2D redBulletSprite;
 
@@ -17,13 +19,16 @@ namespace SpaceBattle.GameStates
         #endregion
 
         #region Player
-        private Player player;
+        private readonly Player player;
         #endregion
 
         public ActionState(Game1 game, ContentManager contentManager, GraphicsDeviceManager graphics)
             : base(game, contentManager, graphics)
         {
-            blueBirdSpriteSheet = contentManager.Load<Texture2D>("SpaceShips/Player/blue-bird");
+            BlueBirdSpriteSheet = contentManager.Load<Texture2D>("SpaceShips/Player/blue-bird");
+            RedDestroyerSpriteSheet = contentManager.Load<Texture2D>("SpaceShips/Enemy/red-destroyer");
+            GreenDestroyerSpriteSheet = contentManager.Load<Texture2D>("SpaceShips/Enemy/green-destroyer");
+
             backgroundSprite = contentManager.Load<Texture2D>("Backgrounds/simple-space-background");
             redBulletSprite = contentManager.Load<Texture2D>("Bullets/red-bullet");
 
