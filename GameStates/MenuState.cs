@@ -23,7 +23,7 @@ public class MenuState : State
         var loadGameButton = new Button(buttonTexture, buttonFont)
         {
             Position = new Vector2(185, 346),
-            Text = "Играть",
+            Text = "Game",
         };
 
         loadGameButton.Click += LoadGameButton_Click;
@@ -31,7 +31,7 @@ public class MenuState : State
         var quitGameButton = new Button(buttonTexture, buttonFont)
         {
             Position = new Vector2(185, 496),
-            Text = "Выйти",
+            Text = "Quit",
         };
 
         quitGameButton.Click += QuitGameButton_Click;
@@ -61,7 +61,7 @@ public class MenuState : State
 
     private void LoadGameButton_Click(object sender, EventArgs e)
     {
-        Game.ChangeState(new GameState(Game, Graphics, ContentManager));
+        Game.ChangeState(new ActionState(Game, ContentManager, Graphics));
     }
     
     private void QuitGameButton_Click(object sender, EventArgs e)
