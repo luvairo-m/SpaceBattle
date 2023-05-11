@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Content\Backgrounds\" />
     <Folder Include="Content\Bullets\" />
+    <Folder Include="Content\Controls\" />
     <Folder Include="Content\SpaceShips\Player\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">

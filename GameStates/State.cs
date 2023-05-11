@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceBattle.GameStates
 {
-    internal abstract class State
+    public abstract class State
     {
         protected ContentManager ContentManager { get; }
         protected GraphicsDeviceManager Graphics { get; }
