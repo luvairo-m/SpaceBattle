@@ -14,14 +14,14 @@ public class MenuState : State
     public MenuState(Game1 game, GraphicsDeviceManager graphicsDevice, ContentManager content) 
         : base(game, content, graphicsDevice)
     {
-        var buttonTexture = content.Load<Texture2D>("Controls/Button");
+        var buttonTexture = content.Load<Texture2D>("Controls/ButtonYellow");
         var buttonFont = content.Load<SpriteFont>("Fonts/Font");
 
         var loadGameButton = new Button(buttonTexture, buttonFont)
         {
             Position = new Vector2(Game1.WindowWidth / 2 - buttonTexture.Width / 2, 
             Game1.WindowHeight / 2 - buttonTexture.Height - 5),
-            Text = "Start",
+            Text = "Играть",
         };
 
         loadGameButton.Click += LoadGameButton_Click;
@@ -29,7 +29,7 @@ public class MenuState : State
         var quitGameButton = new Button(buttonTexture, buttonFont)
         {
             Position = new Vector2(Game1.WindowWidth / 2 - buttonTexture.Width / 2, Game1.WindowHeight / 2),
-            Text = "Quit",
+            Text = "Выйти",
         };
 
         quitGameButton.Click += QuitGameButton_Click;
@@ -48,7 +48,7 @@ public class MenuState : State
         foreach (var component in components)
             component.Draw(gameTime, spriteBatch);
 
-        Graphics.GraphicsDevice.Clear(Color.Blue);
+        Graphics.GraphicsDevice.Clear(Color.Black);
 
         spriteBatch.End();
     }
