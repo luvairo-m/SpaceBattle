@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using SpaceBattle.Controllers;
 using System.Drawing;
 using System;
+using System.IO;
 
 namespace SpaceBattle.Models
 {
@@ -16,6 +17,7 @@ namespace SpaceBattle.Models
 
         public override void Update(GameTime gameTime)
         {
+            File.WriteAllText("1.txt", "qwe");
             var keyboardState = Keyboard.GetState();
 
             EnemyController.SimpleEnemyAdding(gameTime);

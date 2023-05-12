@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceBattle.Controllers;
 using SpaceBattle.Models;
+using System;
+using System.IO;
 
 namespace SpaceBattle.GameStates
 {
@@ -61,6 +63,8 @@ namespace SpaceBattle.GameStates
 
             foreach (var simpleEnemy in EnemyController.simpleEnemies)
             {
+                //simpleEnemy.CurrentShip.Animation.DrawWithScale(spriteBatch);
+
                 spriteBatch.Draw(simpleEnemySpriteSheet, new Vector2(simpleEnemy.Position.X - simpleEnemy.Size.Width / 2, simpleEnemy.Position.Y - simpleEnemy.Size.Height / 2),
                     Color.White);
             }
@@ -73,6 +77,7 @@ namespace SpaceBattle.GameStates
             background1.Update(gameTime);
             background2.Update(gameTime);
             player.Update(gameTime);
+            EnemyController.SimpleEnemyAdding(gameTime);
 
 
             for (var i = 0; i < BulletController.bullets.Count; i++)

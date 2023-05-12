@@ -17,9 +17,15 @@ namespace SpaceBattle.Controllers
 
         public static Texture2D SimpleEnemySprite;
 
+        public static bool is_add = false;
+
         public static void SimpleEnemyAdding(GameTime gameTime)
         {
-            simpleEnemies.Add(new SimpleEnemy(ShipInitializer.Initialize(ShipType.RedDestroyer), 10, new(100, 100), new(100, 100), EnemyController.SimpleEnemySprite));
+            if (!is_add)
+            {
+                simpleEnemies.Add(new SimpleEnemy(ShipInitializer.Initialize(ShipType.RedDestroyer), 50, new(100, 50), new(300, 300), EnemyController.SimpleEnemySprite));
+                is_add = true;
+            }
         }
     }
 }

@@ -24,6 +24,14 @@ namespace SpaceBattle.Models
                     },
                     Size = new(154, 113)
                 },
+                ShipType.RedDestroyer => new SpaceShip
+                { 
+                    Animation = new SpriteAnimation(ActionState.simpleEnemySpriteSheet, 3, 3)
+                    { 
+                        Scale = 0.2f,
+                    },
+                    Size = new(1000, 1000)
+                },
                 _ => throw new ArgumentException("Ship not found"),
             };
         }
